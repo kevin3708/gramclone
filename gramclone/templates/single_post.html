@@ -1,0 +1,79 @@
+{% load static %}
+{% load bootstrap4 %}
+{% include "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/movie.css' %}">
+{% endblock  %}
+
+{% block content %}
+
+
+    
+
+    
+<div class="container">
+    {% if post %}
+    
+    <h1 style="text-decoration: underline;" class="text-center">{{ post.image_name }}</h1>
+    <p class="lead text-center">{{ post.caption }}</p>
+
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <div class="embed-responsive embed-responsive-16by9">
+              <img class="img-fluid embed-responsive-item" src="{{post.image.url}}">
+            </div>
+             </div>
+            </div>
+            <br>
+              <div class="container">
+                  <div class="row">
+                      <div class="col-md-6 col-sm-6 col-lg-6">
+                        <div style="max-width: 100%;">
+                            <div class="row no-gutters">
+                              <div class="col-md-1 mt-3">                                  
+                                <img src="{{ post.profile.avatar.url }}" class="card-img img-fluid rounded-circle" alt="avatar">
+                              </div>
+                              <div class="col-md-8">
+                                <div class="card-body">
+                                  <h3 class="card-title">{{ post.user }}</h3>
+                                
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <a href="{% url 'likePost' post.id %}"><i class="fas fa-thumbs-up fa-2x">  {{ post.like }} Likes</i></a>
+                          <p class="card-text lead"><small class="text-muted">Posted {{ post.date| timesince }} ago</small></p>
+                          <h4 class="" style="text-decoration: underline;">Write a comment...</h4>
+                          <form class="form-group" method="POST"> 
+                              {% csrf_token %} 
+                              {{ backend_form }}
+                              {% bootstrap_form form %} 
+                              <button type="submit" class="btn btn-sm btn-outline-success">Submit</button>
+                          </form>  
+                      </div>
+                    
+
+
+
+                      <div class="col-md-6 col-sm-6 col-lg-6">
+                        <h3 class="text-center" style="text-decoration: underline;">Comments</h3>
+        
+                        {% for items in comments %}
+                            <blockquote class="blockquote bq-success">
+                            <hr>
+                            <p>{{items.comment}}</p>
+                            <footer class="blockquote-footer">Posted By : <cite title="Source Title">{{items.user}}</cite></footer>              
+                            <p class="footer"><cite title="Source Title">{{ items.date| timesince }} ago</cite></p>              
+                            </blockquote>                  
+                            {% endfor %}
+                      </div>
+                  </div>
+              </div>
+           
+            
+
+         
+{% endif %}
+</div>
+{% endblock  %}

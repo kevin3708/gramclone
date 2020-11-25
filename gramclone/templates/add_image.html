@@ -1,0 +1,15 @@
+{% load bootstrap4 %}
+{% include "base.html" %}
+{% block content %}
+
+<div class="container mt-3">
+    <h2 style="text-decoration: underline;">New Post</h2>
+    <br>
+    <form class="form-group" method="POST" enctype="multipart/form-data"> 
+        {% csrf_token %} 
+        {% bootstrap_form form %} 
+        <button type="submit" class="btn btn-sm btn-outline-success">Submit</button>
+    </form> 
+</div>
+  
+{% endblock  %}

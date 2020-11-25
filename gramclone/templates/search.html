@@ -1,0 +1,59 @@
+{% include "base.html" %}
+
+{% block content %}
+<div class="container">
+
+  <div class="row">
+    {% if users %}
+      <h2>Found {{ users|length }} account(s) for users {{message}}</h2>
+    {% else %}
+      <h2> Found 0 accounts for {{message}}</h2>
+    {% endif %}
+
+  </div>
+
+  <br>
+  
+  {% if users %}
+
+  <h2 style="text-decoration: underline;">Matching "{{message}}" Accounts</h2>
+
+  {% for items in users %}
+
+  <div class="row">
+    <div class="col-sm-5 col-md-5 col-lg-5">
+      <!-- News jumbotron -->
+<div class="card">
+
+  <!-- Grid row -->
+  <div class="row">
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-md-7 text-md-left ml-3 mt-3">
+
+      <a href="{% url 'profile' items.username %}"><h4 class="h4 mb-4">{{ items.username }}</h4></a>
+
+      
+
+      <p class="font-weight-normal">{{ items.email }}</p>
+  
+
+    </div>
+    <!-- Grid column -->
+
+  </div>
+  <!-- Grid row -->
+
+</div>
+<!-- News jumbotron -->
+    </div>
+  </div>
+    
+  {% endfor %}
+    
+  {% endif %}
+    
+
+</div>
+{% endblock %}

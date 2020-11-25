@@ -1,0 +1,27 @@
+ 
+body{
+    background-color: black;
+}
+ a{
+    text-decoration: none;
+}
+.jumbotron{
+    width: 85%;
+    height: 550px;
+}
+.view img{
+    width: 70%;
+    height: 290px;
+    object-fit: cover;
+}
+@media screen and (max-width: 720px) {
+    .view img{
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+    .jumbotron{
+        width: 100%;
+        height: auto;
+    }
+} 

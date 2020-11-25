@@ -1,0 +1,42 @@
+<nav class="mb-1 navbar navbar-expand-lg navbar-light dark-color">
+    <a class="navbar-brand" href="/"> <i class="fab fa-instagram"></i> GramClone </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+      aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+      <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'addImage' %}">
+            <i class="fas fa-plus"></i> Add post
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'timeline' %}">
+            <i class="fas fa-list"></i> My Timeline</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user"></i> {{ request.user.username}} </a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+            {% if user %}
+            <a class="dropdown-item" href="{% url 'profile' request.user.username %}">My Account</a>
+            {% endif %} 
+            <a class="dropdown-item" href="/accounts/password_change">Change Password</a>
+            <a class="dropdown-item" href="/logout">Log Out</a>
+          </div>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/accounts/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/accounts/register">Create Account</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+  

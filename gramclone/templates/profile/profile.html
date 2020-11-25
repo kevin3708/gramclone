@@ -1,0 +1,95 @@
+{%include 'base.html'%}
+{% load static %}
+{% load cloudinary %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock  %}
+
+{% block content %}
+
+<div class="container-fluid text-center">
+  <br>
+            <!-- Card -->
+<div class="card testimonial-card">
+
+    <!-- Background color -->
+    <div class="card-up indigo lighten-1"></div>
+  
+    <!-- Avatar -->
+    <div class="avatar mx-auto white mt-2">
+      <img src="{{ profile.avatar.url }}" class="img-fluid rounded-circle"
+        alt="My Avatar">
+    </div>
+  
+    <!-- Content -->
+    <div class="card-body">
+      <!-- Name -->
+      <h2 class="card-title">{{ profile.user }}</h2>
+      
+      {% if profile.location %}
+      <h5 class="card-title text-muted">Location : {{ profile.location }}</h5>
+      {% endif %}
+              
+      {% if request.user == profile.user %} 
+      <h3 class="card-title">{{ profile.user.email }}</h3>
+        {% elif follow_status == True %}
+      <a class="btn btn-sm btn-danger" href="{% url 'follow' profile.user 0 %}">Unfollow</a>
+      {% else %}
+      <a class="btn btn-sm btn-success" href="{% url 'follow' profile.user 1 %}">Follow</a>
+      {% endif %}
+      <hr>
+      <nav class="level is-mobile">
+        <div class="level-item has-text-center">
+          <p class="heading">Followers</p>
+          <h3 class="title">{{ follower_count }}</h3>
+        </div>
+        <div class="level-item has-text-center">
+          <p class="heading">Following</p>
+          <h3 class="title">{{ following_count }}</h3>
+        </div>
+        <div class="level-item has-text-center">
+          <p class="heading">Posts</p>
+          <h3 class="title">{{ post_count}}</h3>
+        </div>
+      </nav>
+      <hr>
+      <!-- Quotation -->
+      <h4 style="text-decoration: underline;">Bio</h4>
+      <p><i class="fas fa-quote-left"></i> {{ profile.bio }}
+      </p>
+      {% if request.user == profile.user %}
+      <a class="btn btn-outline-dark" href="{% url 'editProfile' profile.user %}">Edit profile</a>
+      {% endif %}
+    </div>
+  
+  </div>
+  <!-- Card -->
+<br>
+
+<div class="container">
+  {% if request.user == profile.user %}
+  <h2 style="text-decoration: underline;" class="text-center">My Images</h2>
+  {% else %}
+  <h2 style="text-decoration: underline;" class="text-center">User Images</h2>
+  {% endif %}
+  {% if posts %}
+    <div class="row">        
+      {% for items in posts %}
+        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+        <a href="{% url 'singlePost' items.id %}">
+          <img class="img-fluid img-thumbnail" src="{{ items.image.url }}" alt="{{ items.image_name }}">
+        </a>
+    </div>     
+    {% endfor %}
+    </div>
+    {% else %}
+      <h3 class="text-center">You Have Not Posted Anything</h3>
+      <div class="text-center">
+        <a class="btn btn-deep-purple btn-sm" href="{% url 'addImage' %}">Add Post</a>
+      </div>
+      {% endif %}
+    <br>
+</div>
+  
+{% endblock  %}

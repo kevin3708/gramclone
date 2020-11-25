@@ -1,0 +1,18 @@
+.level{
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.img-thumbnail{
+    width:  300px;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .avatar img {
+    width:  300px;
+    height: 300px;
+    object-fit: cover;
+  }

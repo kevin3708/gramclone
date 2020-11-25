@@ -1,0 +1,78 @@
+{%include 'base.html'%}
+{% load tz %}  
+
+{% block content %} 
+
+<div class="container">
+
+  <h1 style="text-decoration: underline;">My Timeline...</h1>
+
+  <br>
+
+    {% for items in post_items %}
+        <!-- News jumbotron -->
+<div class="text-center hoverable p-4">
+
+    <!-- Grid row -->
+    <div class="row">
+  
+      <!-- Grid column -->
+      <div class="col-md-7 offset-md-1 mx-1 my-1">
+  
+        <!-- Featured image -->
+        <div class="view overlay">
+          <img src="{{ items.image.url }}" class="img-fluid z-depth-1 img-thumbnail hoverable" alt="{{ items.user}} Avatar">
+          <a href="{% url 'singlePost' items.id %}">
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+  
+      </div>
+      <!-- Grid column -->
+  
+      <!-- Grid column -->
+      <div class="col-md-3 text-md-right ml-5 mt-0">
+  
+        <!-- Excerpt -->
+  
+        <h3 class="h4 mb-1">{{ items.image_name }}</h3>
+  
+        <p class="lead font-weight-normal">{{ items.caption }}</p>
+        <p class="lead font-weight-bolder">by <a><strong>{{ items.user }}</strong></a>,<br> on <small>{% localtime on %}{{ items.date }}{% endlocaltime %}</small></p>
+
+        <div class="rounded-bottom pt-1">
+            <ul class="list-unstyled list-inline font-small">
+
+                <li class="list-inline-item pr-2">
+                    <a href="{% url 'likePost' items.id %}" class="green-text"> 
+                        <h6 class="h6 pb-1"><i class="far fa-heart"></i> {{ items.like }}</h6>
+                      </a>
+                </li>
+
+                <li class="list-inline-item pr-2">
+                    <a href="{% url 'singlePost' items.id %}" class="green-text"> 
+                        <h6 class="h6 pb-1"><i class="fas fa-comment-dots"></i> Comment</h6>
+                      </a>            
+                </li>
+
+                </ul>
+
+        </div>  
+      </div>
+    </div>
+      <!-- Grid column -->
+  
+    </div>
+    <!-- Grid row -->
+  
+<hr style="color: #111;">
+{% empty %}
+<h2 class="text-center" style="text-decoration: underline;">No Posts Available</h2>
+
+{% endfor %}
+<br>
+<br>
+ 
+</div>
+
+  {% endblock %}

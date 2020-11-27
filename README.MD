@@ -20,7 +20,7 @@ This project allows users to view different images on the main page that interes
 
 ## Getting Files
 
-* Click this [link](https://github.com/kevin3708/Django-IP2) to access my github repository with the application code.
+* Click this [link](https://github.com/kevin3708/gramclone) to access my github repository with the application code.
 
 * On the top panel you will see a green button with a download icon and the word "CODE" written next to it. Click it to download the project zip file.​
 
